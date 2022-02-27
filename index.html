@@ -1,0 +1,70 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Map of Canada</title>
+<style>
+    html,
+    body,
+    #viewDiv {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    }
+    #title {
+        font-family: Arial;
+        text-align: center;
+        color:crimson;
+        padding: 5pt;
+        position: absolute;
+        z-index: 5;
+        top: 5px;
+        left: 80px;
+        border-radius: 20px;
+        background-color: white;
+    }
+</style>
+<link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
+<script src="https://js.arcgis.com/4.22/"></script>
+
+<script>
+    require([
+    "esri/config",
+    "esri/WebMap",
+    "esri/views/MapView",
+    "esri/widgets/ScaleBar",
+    "esri/widgets/Legend",
+    "esri/widgets/Search"
+    ], function(esriConfig, WebMap, MapView, ScaleBar, Legend, Search) {
+    esriConfig.apiKey = "AAPK94514f5870d44ffeaf651525c9a848aez_E4ARClsNrbgt_3Jt5vMFkyARWOQJI34UE-qt_V5_DxuZ8MLWHBjRtVTngHuA4k";
+    const webmap = new WebMap({
+        portalItem: {
+        id: "566aea641fca4d10b6a4867ac4c529ac"
+        }
+    });
+    const view = new MapView({
+        container: "viewDiv",
+        map: webmap
+    });
+    const scalebar = new ScaleBar({
+        view: view
+    });
+
+    view.ui.add(scalebar, "bottom-left");
+    const legend = new Legend({
+        view: view
+    });
+    view.ui.add(legend, "top-right");
+    view.ui.add(new Search({view: view}),"top-right");
+    });
+</script>
+</head>
+
+<body>
+    <h1 id="title">Map of Canadian Provinces and Territories</h1>
+    <div id="viewDiv"></div>
+</body>
+
+</html>
